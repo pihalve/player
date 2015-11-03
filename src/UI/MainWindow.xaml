@@ -4,37 +4,62 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pihalve.Player.UI"
+        xmlns:cmd="clr-namespace:Pihalve.Player.UI.Commands"
         mc:Ignorable="d"
         Title="Pihalve Player" Height="450" Width="700">
     <Window.CommandBindings>
-        <CommandBinding Command="local:Commands.Exit" CanExecute="ExitCommand_CanExecute" Executed="ExitCommand_Executed"/>
+        <CommandBinding Command="cmd:Application.Exit" CanExecute="ExitCommand_CanExecute" Executed="ExitCommand_Executed"/>
+        <CommandBinding Command="cmd:Playback.Play" CanExecute="PlayCommand_CanExecute" Executed="PlayCommand_Executed"/>
+        <CommandBinding Command="cmd:Playback.Pause" CanExecute="PauseCommand_CanExecute" Executed="PauseCommand_Executed"/>
+        <CommandBinding Command="cmd:Playback.Stop" CanExecute="StopCommand_CanExecute" Executed="StopCommand_Executed"/>
+        <CommandBinding Command="cmd:Playback.Previous" CanExecute="PreviousCommand_CanExecute" Executed="PreviousCommand_Executed"/>
+        <CommandBinding Command="cmd:Playback.Next" CanExecute="NextCommand_CanExecute" Executed="NextCommand_Executed"/>
     </Window.CommandBindings>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
                 <MenuItem Header="_Settings"></MenuItem>
-                <MenuItem Command="local:Commands.Exit"></MenuItem>
+                <MenuItem Command="cmd:Application.Exit"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Playback">
+                <MenuItem Command="cmd:Playback.Play"></MenuItem>
+                <MenuItem Command="cmd:Playback.Pause"></MenuItem>
+                <MenuItem Command="cmd:Playback.Stop"></MenuItem>
+                <MenuItem Command="cmd:Playback.Previous"></MenuItem>
+                <MenuItem Command="cmd:Playback.Next"></MenuItem>
             </MenuItem>
             <MenuItem Header="_Help">
                 <MenuItem Header="_About"></MenuItem>
             </MenuItem>
         </Menu>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <StackPanel Name="Controls" Orientation="Horizontal">
+                <Button Command="cmd:Playback.Play">Play</Button>
+                <Button Command="cmd:Playback.Pause">Pause</Button>
+                <Button Command="cmd:Playback.Stop">Stop</Button>
+                <Button Command="cmd:Playback.Previous">Previous</Button>
+                <Button Command="cmd:Playback.Next">Next</Button>
+            </StackPanel>
+            <StackPanel Name="Display">
+                <TextBlock Name="Playing" Text="{Binding ElementName=ContentList, Path=Items.CurrentItem.Name}"></TextBlock>
+            </StackPanel>
+        </StackPanel>
         <Grid Name="MainGrid">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" Name="NavigatorColumn" />
+                <ColumnDefinition Width="*" Name="NavigationColumn" />
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="*" Name="ContentColumn" />
             </Grid.ColumnDefinitions>
-            <ListView Name="Navigator">
+            <ListView Name="NavigationList">
                 <ListViewItem>Navigation Item 1</ListViewItem>
                 <ListViewItem>Navigation Item 2</ListViewItem>
                 <ListViewItem>Navigation Item 3</ListViewItem>
             </ListView>
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"></GridSplitter>
-            <ListView Name="Content" Grid.Column="2">
-                <ListViewItem>Content Item 1</ListViewItem>
+            <ListView Name="ContentList" Grid.Column="2">
+                <!--<ListViewItem>Content Item 1</ListViewItem>
                 <ListViewItem>Content Item 2</ListViewItem>
-                <ListViewItem>Content Item 3</ListViewItem>
+                <ListViewItem>Content Item 3</ListViewItem>-->
             </ListView>
         </Grid>
     </DockPanel>
