@@ -82,6 +82,8 @@
     <Compile Include="Commands\Application.cs" />
     <Compile Include="Commands\Playback.cs" />
     <Compile Include="IMediaPlayer.cs" />
+    <Compile Include="Library\Model\Playlist.cs" />
+    <Compile Include="Library\Model\PlaylistItem.cs" />
     <Compile Include="Library\Model\Track.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
