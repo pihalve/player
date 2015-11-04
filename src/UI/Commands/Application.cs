@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace Pihalve.Player.UI.Commands
+namespace Pihalve.Player.Commands
 {
     public static class Application
     {

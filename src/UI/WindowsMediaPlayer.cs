@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Media;
 
-namespace Pihalve.Player.UI
+namespace Pihalve.Player
 {
     public class WindowsMediaPlayer : IMediaPlayer
     {

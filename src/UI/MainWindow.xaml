@@ -1,10 +1,10 @@
-﻿<Window x:Class="Pihalve.Player.UI.MainWindow"
+﻿<Window x:Class="Pihalve.Player.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Pihalve.Player.UI"
-        xmlns:cmd="clr-namespace:Pihalve.Player.UI.Commands"
+        xmlns:local="clr-namespace:Pihalve.Player"
+        xmlns:cmd="clr-namespace:Pihalve.Player.Commands"
         mc:Ignorable="d"
         Title="Pihalve Player" Height="450" Width="700">
     <Window.CommandBindings>

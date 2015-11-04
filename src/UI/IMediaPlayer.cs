@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Pihalve.Player.UI
+namespace Pihalve.Player
 {
     public interface IMediaPlayer
     {
