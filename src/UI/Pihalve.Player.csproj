@@ -89,6 +89,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Styles\CoreStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="WindowsMediaPlayer.cs" />
@@ -129,6 +133,79 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Styles\Images\alert-circled.png" />
+    <Resource Include="Styles\Images\checkmark-circled.png" />
+    <Resource Include="Styles\Images\checkmark-empty.png" />
+    <Resource Include="Styles\Images\checkmark-outline.png" />
+    <Resource Include="Styles\Images\checkmark.png" />
+    <Resource Include="Styles\Images\close-circled.png" />
+    <Resource Include="Styles\Images\cloud-outline.png" />
+    <Resource Include="Styles\Images\cloud.png" />
+    <Resource Include="Styles\Images\cog-outline.png" />
+    <Resource Include="Styles\Images\cog.png" />
+    <Resource Include="Styles\Images\contact-outline.png" />
+    <Resource Include="Styles\Images\contact.png" />
+    <Resource Include="Styles\Images\drag.png" />
+    <Resource Include="Styles\Images\fastforward-outline.png" />
+    <Resource Include="Styles\Images\fastforward.png" />
+    <Resource Include="Styles\Images\folder-outline.png" />
+    <Resource Include="Styles\Images\folder.png" />
+    <Resource Include="Styles\Images\gear-outline.png" />
+    <Resource Include="Styles\Images\gear.png" />
+    <Resource Include="Styles\Images\help-circled.png" />
+    <Resource Include="Styles\Images\help-empty.png" />
+    <Resource Include="Styles\Images\help-outline.png" />
+    <Resource Include="Styles\Images\help-thick.png" />
+    <Resource Include="Styles\Images\help.png" />
+    <Resource Include="Styles\Images\information-circled.png" />
+    <Resource Include="Styles\Images\information-empty.png" />
+    <Resource Include="Styles\Images\information-outline.png" />
+    <Resource Include="Styles\Images\information.png" />
+    <Resource Include="Styles\Images\loop.png" />
+    <Resource Include="Styles\Images\minus-circled.png" />
+    <Resource Include="Styles\Images\minus-empty.png" />
+    <Resource Include="Styles\Images\minus-outline.png" />
+    <Resource Include="Styles\Images\minus-thick.png" />
+    <Resource Include="Styles\Images\minus.png" />
+    <Resource Include="Styles\Images\more.png" />
+    <Resource Include="Styles\Images\musical-notes.png" />
+    <Resource Include="Styles\Images\navicon.png" />
+    <Resource Include="Styles\Images\pause-outline.png" />
+    <Resource Include="Styles\Images\pause.png" />
+    <Resource Include="Styles\Images\person-outline.png" />
+    <Resource Include="Styles\Images\person.png" />
+    <Resource Include="Styles\Images\play-outline.png" />
+    <Resource Include="Styles\Images\play.png" />
+    <Resource Include="Styles\Images\plus-circled.png" />
+    <Resource Include="Styles\Images\plus-empty.png" />
+    <Resource Include="Styles\Images\plus-outline.png" />
+    <Resource Include="Styles\Images\plus-thick.png" />
+    <Resource Include="Styles\Images\plus.png" />
+    <Resource Include="Styles\Images\redo-outline.png" />
+    <Resource Include="Styles\Images\redo.png" />
+    <Resource Include="Styles\Images\refresh-empty.png" />
+    <Resource Include="Styles\Images\refresh-noncircled.png" />
+    <Resource Include="Styles\Images\refresh.png" />
+    <Resource Include="Styles\Images\rewind-outline.png" />
+    <Resource Include="Styles\Images\rewind.png" />
+    <Resource Include="Styles\Images\search-strong.png" />
+    <Resource Include="Styles\Images\search.png" />
+    <Resource Include="Styles\Images\shuffle.png" />
+    <Resource Include="Styles\Images\skipbackward-outline.png" />
+    <Resource Include="Styles\Images\skipbackward.png" />
+    <Resource Include="Styles\Images\skipforward-outline.png" />
+    <Resource Include="Styles\Images\skipforward.png" />
+    <Resource Include="Styles\Images\star-outline.png" />
+    <Resource Include="Styles\Images\star.png" />
+    <Resource Include="Styles\Images\stop.png" />
+    <Resource Include="Styles\Images\trash-outline.png" />
+    <Resource Include="Styles\Images\trash.png" />
+    <Resource Include="Styles\Images\undo-outline.png" />
+    <Resource Include="Styles\Images\undo.png" />
+    <Resource Include="Styles\Images\volume-high.png" />
+    <Resource Include="Styles\Images\volume-low.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

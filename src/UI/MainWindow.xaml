@@ -34,11 +34,11 @@
         </Menu>
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
             <StackPanel Name="Controls" Orientation="Horizontal">
-                <Button Command="cmd:Playback.Play">Play</Button>
-                <Button Command="cmd:Playback.Pause">Pause</Button>
-                <Button Command="cmd:Playback.Stop">Stop</Button>
-                <Button Command="cmd:Playback.Previous">Previous</Button>
-                <Button Command="cmd:Playback.Next">Next</Button>
+                <Button Command="cmd:Playback.Stop" Style="{StaticResource Stop}">Stop</Button>
+                <Button Command="cmd:Playback.Play" Style="{StaticResource Play}">Play</Button>
+                <Button Command="cmd:Playback.Pause" Style="{StaticResource Pause}">Pause</Button>
+                <Button Command="cmd:Playback.Previous" Style="{StaticResource Previous}">Previous</Button>
+                <Button Command="cmd:Playback.Next" Style="{StaticResource Next}">Next</Button>
             </StackPanel>
             <StackPanel Name="Display">
                 <TextBlock Name="Playing" Text="{Binding ElementName=ContentList, Path=Items.CurrentItem.Name}"></TextBlock>
