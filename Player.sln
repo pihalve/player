@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{29844E08-2971-45F0-AD97-EC4BBE489EFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pihalve.Player", "src\UI\Pihalve.Player.csproj", "{7F0F306A-3CBC-4E74-875E-7F5B41ED8E60}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pihalve.Player", "src\Pihalve.Player\Pihalve.Player.csproj", "{7F0F306A-3CBC-4E74-875E-7F5B41ED8E60}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
