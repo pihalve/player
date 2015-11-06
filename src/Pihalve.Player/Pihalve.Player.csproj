@@ -53,6 +53,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -82,9 +83,12 @@
     <Compile Include="Commands\Application.cs" />
     <Compile Include="Commands\Playback.cs" />
     <Compile Include="IMediaPlayer.cs" />
+    <Compile Include="Library\ILibrarySerializer.cs" />
+    <Compile Include="Library\Model\Library.cs" />
     <Compile Include="Library\Model\Playlist.cs" />
     <Compile Include="Library\Model\PlaylistItem.cs" />
     <Compile Include="Library\Model\Track.cs" />
+    <Compile Include="Library\LibraryXmlSerializer.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
