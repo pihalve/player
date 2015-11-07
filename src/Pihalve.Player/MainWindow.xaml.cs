@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Pihalve.Player.Library;
 
 namespace Pihalve.Player
 {
@@ -21,11 +22,18 @@ namespace Pihalve.Player
     /// </summary>
     public partial class MainWindow : Window
     {
-        private IMediaPlayer _mediaPlayer;
+        private const string LibraryFileName = "pihalve-player-library.xml";
+
+        private readonly ITrackFactory _trackFactory;
+        private readonly ILibrarySerializer _librarySerializer;
+        private readonly IMediaPlayer _mediaPlayer;
         private string _filesPath;
 
-        public MainWindow()
+        public MainWindow(ITrackFactory trackFactory, ILibrarySerializer librarySerializer)
         {
+            _trackFactory = trackFactory;
+            _librarySerializer = librarySerializer;
+
             InitializeComponent();
 
             // Defaults
@@ -41,6 +49,19 @@ namespace Pihalve.Player
 
             _mediaPlayer = new WindowsMediaPlayer();
             _mediaPlayer.Volume = .5d;
+        }
+
+        private void LibraryAddFolder_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new System.Windows.Forms.FolderBrowserDialog();
+            System.Windows.Forms.DialogResult result = dialog.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                var libraryBuilder = new NewLibraryBuilder(new Uri(dialog.SelectedPath), _trackFactory);
+                LibraryDirector.Construct(libraryBuilder);
+
+                _librarySerializer.Serialize(libraryBuilder.Library, LibraryFileName);
+            }
         }
 
         private void ExitCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)

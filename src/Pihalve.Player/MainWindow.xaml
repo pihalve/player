@@ -18,6 +18,9 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
+                <MenuItem Header="_Library">
+                    <MenuItem Header="_Add folder..." Click="LibraryAddFolder_Click"></MenuItem>
+                </MenuItem>
                 <MenuItem Header="_Settings"></MenuItem>
                 <MenuItem Command="cmd:Application.Exit"></MenuItem>
             </MenuItem>
