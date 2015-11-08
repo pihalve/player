@@ -22,7 +22,7 @@ namespace Pihalve.Player.Test
                 Added = new DateTimeOffset(2015, 11, 6, 13, 14, 15, new TimeSpan(1, 0, 0)),
                 Duration = new TimeSpan(1042),
                 Year = null,
-                Location = new Uri(@"C:\Some\Path")
+                Location = @"C:\Some\Path"
             };
             var playlist = new Playlist
             {

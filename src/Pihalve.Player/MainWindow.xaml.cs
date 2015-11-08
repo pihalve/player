@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Pihalve.Player.Library;
+using Pihalve.Player.Library.Model;
 
 namespace Pihalve.Player
 {
@@ -40,27 +41,32 @@ namespace Pihalve.Player
             MainGrid.ColumnDefinitions.First(c => c.Name == "NavigationColumn").Width = new GridLength(30, GridUnitType.Star);
             MainGrid.ColumnDefinitions.First(c => c.Name == "ContentColumn").Width = new GridLength(70, GridUnitType.Star);
 
-            _filesPath = @"M:\2000's";
-            var files = new DirectoryInfo(_filesPath).GetFiles("*.mp3").OrderBy(x => x.Name);
-            ContentList.DisplayMemberPath = "Name";
-            //ContentList.IsSynchronizedWithCurrentItem = true;
-            ContentList.ItemsSource = files;
-            ContentList.Items.MoveCurrentTo(null);
+            _filesPath = @"M:\VA";
+            //var tracks = new DirectoryInfo(_filesPath).GetFiles("*.mp3").OrderBy(x => x.Name);
+            //ContentList.DisplayMemberPath = "Name";
+            ////ContentList.IsSynchronizedWithCurrentItem = true;
+            //ContentList.ItemsSource = tracks;
+            //ContentList.Items.MoveCurrentTo(null);
 
             _mediaPlayer = new WindowsMediaPlayer();
             _mediaPlayer.Volume = .5d;
         }
 
-        private void LibraryAddFolder_Click(object sender, RoutedEventArgs e)
+        private void LibraryNew_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new System.Windows.Forms.FolderBrowserDialog();
+            dialog.SelectedPath = _filesPath;
             System.Windows.Forms.DialogResult result = dialog.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
             {
                 var libraryBuilder = new NewLibraryBuilder(new Uri(dialog.SelectedPath), _trackFactory);
                 LibraryDirector.Construct(libraryBuilder);
 
-                _librarySerializer.Serialize(libraryBuilder.Library, LibraryFileName);
+                ContentList.DisplayMemberPath = "Title";
+                ContentList.ItemsSource = libraryBuilder.Library.Tracks;
+                ContentList.Items.MoveCurrentTo(null);
+
+                //_librarySerializer.Serialize(libraryBuilder.Library, LibraryFileName);
             }
         }
 
@@ -87,7 +93,7 @@ namespace Pihalve.Player
             }
 
             ContentList.Items.MoveCurrentTo(ContentList.SelectedItem);
-            Play((FileInfo)ContentList.SelectedItem);
+            Play((Track)ContentList.SelectedItem);
         }
 
         private void PauseCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -127,7 +133,7 @@ namespace Pihalve.Player
             {
                 Stop();
                 ContentList.SelectedItem = ContentList.Items.CurrentItem;
-                Play((FileInfo)ContentList.SelectedItem);
+                Play((Track)ContentList.SelectedItem);
             }
         }
 
@@ -147,13 +153,13 @@ namespace Pihalve.Player
             {
                 Stop();
                 ContentList.SelectedItem = ContentList.Items.CurrentItem;
-                Play((FileInfo)ContentList.SelectedItem);
+                Play((Track)ContentList.SelectedItem);
             }
         }
 
-        private void Play(FileInfo source)
+        private void Play(Track source)
         {
-            var fileToPlay = new Uri(source.FullName);
+            var fileToPlay = new Uri(source.Location);
             if (_mediaPlayer.Source == null || !_mediaPlayer.Source.Equals(fileToPlay))
             {
                 _mediaPlayer.Open(fileToPlay);
