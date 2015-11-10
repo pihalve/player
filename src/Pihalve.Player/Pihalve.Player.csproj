@@ -104,14 +104,14 @@
     <Compile Include="Library\ImportedLibraryBuilder.cs" />
     <Compile Include="Library\ITrackFactory.cs" />
     <Compile Include="Library\LibraryDirector.cs" />
-    <Compile Include="Tagging\Model\Id3Tag.cs" />
+    <Compile Include="Tagging\Model\Tag.cs" />
     <Compile Include="Library\Model\Library.cs" />
     <Compile Include="Library\Model\Playlist.cs" />
     <Compile Include="Library\Model\PlaylistItem.cs" />
     <Compile Include="Library\Model\Track.cs" />
     <Compile Include="Library\LibraryXmlSerializer.cs" />
     <Compile Include="Library\NewLibraryBuilder.cs" />
-    <Compile Include="Tagging\TagLibSharpId3TagReader.cs" />
+    <Compile Include="Tagging\TagLibSharpTagReader.cs" />
     <Compile Include="Library\TrackFactory.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -123,6 +123,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ValueConverters\CollectionToStringConverter.cs" />
+    <Compile Include="ValueConverters\TimespanToStringConverter.cs" />
     <Compile Include="WindowsMediaPlayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

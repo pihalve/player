@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Pihalve.Player.Tagging.Model
 {
-    public class Id3Tag
+    public class Tag
     {
         public int? Number { get; set; }
         public int? DiscNumber { get; set; }
@@ -13,5 +14,6 @@ namespace Pihalve.Player.Tagging.Model
         public List<string> Genres { get; } = new List<string>();
         public int? Year { get; set; }
         public string Comment { get; set; }
+        public TimeSpan Duration { get; set; }
     }
 }

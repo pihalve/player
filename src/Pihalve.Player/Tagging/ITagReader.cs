@@ -5,6 +5,6 @@ namespace Pihalve.Player.Tagging
 {
     public interface ITagReader
     {
-        Id3Tag Read(FileInfo file);
+        Tag Read(FileInfo file);
     }
 }

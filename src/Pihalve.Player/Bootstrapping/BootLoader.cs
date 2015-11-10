@@ -12,7 +12,7 @@ namespace Pihalve.Player.Bootstrapping
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterType<TagLibSharpId3TagReader>().As<ITagReader>().Named<ITagReader>("tagReader").InstancePerLifetimeScope();
+            builder.RegisterType<TagLibSharpTagReader>().As<ITagReader>().Named<ITagReader>("tagReader").InstancePerLifetimeScope();
             builder.RegisterType<FileTagReader>().As<ITagReader>().Named<ITagReader>("fallbackTagReader").InstancePerLifetimeScope();
             builder.Register(
                 c => new TrackFactory(

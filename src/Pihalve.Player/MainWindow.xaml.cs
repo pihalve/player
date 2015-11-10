@@ -38,8 +38,10 @@ namespace Pihalve.Player
             InitializeComponent();
 
             // Defaults
-            MainGrid.ColumnDefinitions.First(c => c.Name == "NavigationColumn").Width = new GridLength(30, GridUnitType.Star);
-            MainGrid.ColumnDefinitions.First(c => c.Name == "ContentColumn").Width = new GridLength(70, GridUnitType.Star);
+            Width = 1200;
+            Height = 800;
+            MainGrid.ColumnDefinitions.First(c => c.Name == "NavigationColumn").Width = new GridLength(20, GridUnitType.Star);
+            MainGrid.ColumnDefinitions.First(c => c.Name == "ContentColumn").Width = new GridLength(80, GridUnitType.Star);
 
             _filesPath = @"M:\VA";
             //var tracks = new DirectoryInfo(_filesPath).GetFiles("*.mp3").OrderBy(x => x.Name);
@@ -62,7 +64,7 @@ namespace Pihalve.Player
                 var libraryBuilder = new NewLibraryBuilder(new Uri(dialog.SelectedPath), _trackFactory);
                 LibraryDirector.Construct(libraryBuilder);
 
-                ContentList.DisplayMemberPath = "Title";
+                //ContentList.DisplayMemberPath = "Title";
                 ContentList.ItemsSource = libraryBuilder.Library.Tracks;
                 ContentList.Items.MoveCurrentTo(null);
 

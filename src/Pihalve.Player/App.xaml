@@ -2,12 +2,15 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Pihalve.Player"
+             xmlns:valueConverters="clr-namespace:Pihalve.Player.ValueConverters"
              Startup="App_OnStartup">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/CoreStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <valueConverters:CollectionToStringConverter x:Key="CollectionToStringConverter" />
+            <valueConverters:TimespanToStringConverter x:Key="TimespanToStringConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

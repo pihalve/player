@@ -50,4 +50,17 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style TargetType="GridViewColumnHeader">
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+    </Style>
+    <Style x:Key="NumberColumn" TargetType="GridViewColumnHeader">
+        <Setter Property="HorizontalContentAlignment" Value="Right" />
+    </Style>
+    <Style TargetType="ListViewItem">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    </Style>
+    <Style x:Key="NumberCell" TargetType="TextBlock">
+        <Setter Property="TextAlignment" Value="Right" />
+    </Style>
 </ResourceDictionary>

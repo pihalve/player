@@ -19,7 +19,7 @@ namespace Pihalve.Player.Library
 
         public Track Create(FileInfo file)
         {
-            Id3Tag tag = null;
+            Tag tag = null;
             try
             {
                 tag = _tagReader.Read(file);
@@ -43,6 +43,7 @@ namespace Pihalve.Player.Library
                 Album = tag.Album,
                 Year = tag.Year,
                 Comment = tag.Comment,
+                Duration = tag.Duration,
                 Added = DateTimeOffset.Now,
                 Modified = null,
                 PlayCount = 0,

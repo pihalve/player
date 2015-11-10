@@ -6,7 +6,7 @@ namespace Pihalve.Player.Tagging
 {
     public class FileTagReader : ITagReader
     {
-        public Id3Tag Read(FileInfo file)
+        public Tag Read(FileInfo file)
         {
             int? trackNumber = null;
             string title = null;
@@ -35,7 +35,7 @@ namespace Pihalve.Player.Tagging
                 title = nameParts[2];
             }
 
-            return new Id3Tag
+            return new Tag
             {
                 Number = trackNumber,
                 Title = title,

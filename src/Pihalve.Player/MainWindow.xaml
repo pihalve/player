@@ -60,9 +60,44 @@
             </ListView>
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"></GridSplitter>
             <ListView Name="ContentList" Grid.Column="2">
-                <!--<ListViewItem>Content Item 1</ListViewItem>
-                <ListViewItem>Content Item 2</ListViewItem>
-                <ListViewItem>Content Item 3</ListViewItem>-->
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Title}" />
+                        <GridViewColumn Header="Duration" HeaderContainerStyle="{StaticResource NumberColumn}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=Duration, Converter={StaticResource TimespanToStringConverter}}" Style="{StaticResource NumberCell}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Artist" DisplayMemberBinding="{Binding Path=Artists, Converter={StaticResource CollectionToStringConverter}}" />
+                        <GridViewColumn Header="Album" DisplayMemberBinding="{Binding Album}" />
+                        <GridViewColumn Header="Album artist" DisplayMemberBinding="{Binding Path=AlbumArtists, Converter={StaticResource CollectionToStringConverter}}" />
+                        <GridViewColumn Header="Track" HeaderContainerStyle="{StaticResource NumberColumn}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Number}" Style="{StaticResource NumberCell}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Disc" HeaderContainerStyle="{StaticResource NumberColumn}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding DiscNumber}" Style="{StaticResource NumberCell}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Genre" DisplayMemberBinding="{Binding Path=Genres, Converter={StaticResource CollectionToStringConverter}}" />
+                        <GridViewColumn Header="Year" HeaderContainerStyle="{StaticResource NumberColumn}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Year}" Style="{StaticResource NumberCell}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Comment" DisplayMemberBinding="{Binding Comment}" />
+                    </GridView>
+                </ListView.View>
             </ListView>
         </Grid>
     </DockPanel>
