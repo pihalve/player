@@ -2,6 +2,9 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Pihalve.Player.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
+    <Setting Name="Upgraded" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
     <Setting Name="MainWindowWidth" Type="System.Double" Scope="User">
       <Value Profile="(Default)">1000</Value>
     </Setting>
@@ -13,9 +16,6 @@
     </Setting>
     <Setting Name="MainWindowTop" Type="System.Double" Scope="User">
       <Value Profile="(Default)">10</Value>
-    </Setting>
-    <Setting Name="Upgraded" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>
