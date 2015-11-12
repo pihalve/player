@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Pihalve.Player.Library;
 using Pihalve.Player.Library.Model;
+using Pihalve.Player.Properties;
 
 namespace Pihalve.Player
 {
@@ -38,10 +39,14 @@ namespace Pihalve.Player
             InitializeComponent();
 
             // Defaults
-            Width = 1200;
-            Height = 800;
+            Left = Settings.Default.MainWindowLeft;
+            Top = Settings.Default.MainWindowTop;
+            Width = Settings.Default.MainWindowWidth;
+            Height = Settings.Default.MainWindowHeight;
             MainGrid.ColumnDefinitions.First(c => c.Name == "NavigationColumn").Width = new GridLength(20, GridUnitType.Star);
             MainGrid.ColumnDefinitions.First(c => c.Name == "ContentColumn").Width = new GridLength(80, GridUnitType.Star);
+
+            Closing += MainWindow_Closing;
 
             _filesPath = @"M:\VA";
             //var tracks = new DirectoryInfo(_filesPath).GetFiles("*.mp3").OrderBy(x => x.Name);
@@ -52,6 +57,14 @@ namespace Pihalve.Player
 
             _mediaPlayer = new WindowsMediaPlayer();
             _mediaPlayer.Volume = .5d;
+        }
+
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Settings.Default.MainWindowLeft = Left;
+            Settings.Default.MainWindowTop = Top;
+            Settings.Default.MainWindowWidth = Width;
+            Settings.Default.MainWindowHeight = Height;
         }
 
         private void LibraryNew_Click(object sender, RoutedEventArgs e)

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using Autofac;
 using Pihalve.Player.Bootstrapping;
+using Pihalve.Player.Properties;
 
 namespace Pihalve.Player
 {
@@ -17,9 +12,22 @@ namespace Pihalve.Player
     {
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
+            if (!Settings.Default.Upgraded)
+            {
+                Settings.Default.Upgrade();
+                Settings.Default.Upgraded = true;
+                Settings.Default.Save();
+            }
+
             BootLoader.Boot();
+
             var mainWindow = BootLoader.Container.Resolve<MainWindow>();
             mainWindow.Show();
+        }
+
+        private void App_OnExit(object sender, ExitEventArgs e)
+        {
+            Settings.Default.Save();
         }
     }
 }
