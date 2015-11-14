@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Pihalve.Player.Library;
 using Pihalve.Player.Library.Model;
+using Pihalve.Player.Persistence;
 using Pihalve.Player.Properties;
 
 namespace Pihalve.Player
@@ -27,14 +28,14 @@ namespace Pihalve.Player
         private const string LibraryFileName = "pihalve-player-library.xml";
 
         private readonly ITrackFactory _trackFactory;
-        private readonly ILibrarySerializer _librarySerializer;
+        private readonly IAppDataPersister<Library.Model.Library> _libraryPersister;
         private readonly IMediaPlayer _mediaPlayer;
         private string _filesPath;
 
-        public MainWindow(ITrackFactory trackFactory, ILibrarySerializer librarySerializer)
+        public MainWindow(ITrackFactory trackFactory, IAppDataPersister<Library.Model.Library> libraryPersister)
         {
             _trackFactory = trackFactory;
-            _librarySerializer = librarySerializer;
+            _libraryPersister = libraryPersister;
 
             InitializeComponent();
 
@@ -49,11 +50,8 @@ namespace Pihalve.Player
             Closing += MainWindow_Closing;
 
             _filesPath = @"M:\VA";
-            //var tracks = new DirectoryInfo(_filesPath).GetFiles("*.mp3").OrderBy(x => x.Name);
-            //ContentList.DisplayMemberPath = "Name";
-            ////ContentList.IsSynchronizedWithCurrentItem = true;
-            //ContentList.ItemsSource = tracks;
-            //ContentList.Items.MoveCurrentTo(null);
+            var library = _libraryPersister.Load(LibraryFileName);
+            BindLibrary(library);
 
             _mediaPlayer = new WindowsMediaPlayer();
             _mediaPlayer.Volume = .5d;
@@ -77,11 +75,9 @@ namespace Pihalve.Player
                 var libraryBuilder = new NewLibraryBuilder(new Uri(dialog.SelectedPath), _trackFactory);
                 LibraryDirector.Construct(libraryBuilder);
 
-                //ContentList.DisplayMemberPath = "Title";
-                ContentList.ItemsSource = libraryBuilder.Library.Tracks;
-                ContentList.Items.MoveCurrentTo(null);
+                _libraryPersister.Save(libraryBuilder.Library, LibraryFileName);
 
-                //_librarySerializer.Serialize(libraryBuilder.Library, LibraryFileName);
+                BindLibrary(libraryBuilder.Library);
             }
         }
 
@@ -187,6 +183,13 @@ namespace Pihalve.Player
         {
             _mediaPlayer.Stop();
             _mediaPlayer.Close();
+        }
+
+        private void BindLibrary(Library.Model.Library library)
+        {
+            ContentList.ItemsSource = library.Tracks;
+            ContentList.Items.MoveCurrentTo(null);
+            ////ContentList.IsSynchronizedWithCurrentItem = true;
         }
     }
 }

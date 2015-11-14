@@ -97,10 +97,12 @@
     <Compile Include="Commands\Application.cs" />
     <Compile Include="Commands\Playback.cs" />
     <Compile Include="IMediaPlayer.cs" />
+    <Compile Include="Persistence\IAppDataPersister.cs" />
+    <Compile Include="Persistence\AppDataXmlPersister.cs" />
+    <Compile Include="Persistence\SpecialFolder.cs" />
     <Compile Include="Tagging\FileTagReader.cs" />
     <Compile Include="Tagging\ITagReader.cs" />
     <Compile Include="Library\ILibraryBuilder.cs" />
-    <Compile Include="Library\ILibrarySerializer.cs" />
     <Compile Include="Library\ImportedLibraryBuilder.cs" />
     <Compile Include="Library\ITrackFactory.cs" />
     <Compile Include="Library\LibraryDirector.cs" />
@@ -109,7 +111,6 @@
     <Compile Include="Library\Model\Playlist.cs" />
     <Compile Include="Library\Model\PlaylistItem.cs" />
     <Compile Include="Library\Model\Track.cs" />
-    <Compile Include="Library\LibraryXmlSerializer.cs" />
     <Compile Include="Library\NewLibraryBuilder.cs" />
     <Compile Include="Tagging\TagLibSharpTagReader.cs" />
     <Compile Include="Library\TrackFactory.cs" />
@@ -238,6 +239,7 @@
     <Resource Include="Styles\Images\volume-high.png" />
     <Resource Include="Styles\Images\volume-low.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

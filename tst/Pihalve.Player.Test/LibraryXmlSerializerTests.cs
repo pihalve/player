@@ -4,6 +4,7 @@ using FluentAssertions;
 using NUnit.Framework;
 using Pihalve.Player.Library;
 using Pihalve.Player.Library.Model;
+using Pihalve.Player.Persistence;
 
 namespace Pihalve.Player.Test
 {
@@ -14,7 +15,7 @@ namespace Pihalve.Player.Test
         public void can_serialize_library()
         {
             //// Arrange
-            const string libraryFilePath = @"library.xml";
+            const string libraryFileName = @"library.xml";
             var track = new Track
             {
                 Id = new Guid("{DF565C73-D3F0-4DC4-B9C4-5F9915A13921}"),
@@ -35,13 +36,13 @@ namespace Pihalve.Player.Test
                 Tracks = { track },
                 Playlists = { playlist }
             };
-            var serializer = new LibraryXmlSerializer();
+            var persister = new AppDataXmlPersister<Library.Model.Library>("");
 
             //// Act
-            serializer.Serialize(library, libraryFilePath);
+            persister.Save(library, libraryFileName);
 
             //// Assert
-            var deserializedLibrary = serializer.Deserialize(libraryFilePath);
+            var deserializedLibrary = persister.Load(libraryFileName);
             deserializedLibrary.Tracks.First().Id.Should().Be(track.Id);
             deserializedLibrary.Tracks.First().Added.Should().Be(new DateTimeOffset(2015, 11, 6, 13, 14, 15, new TimeSpan(1, 0, 0)));
             deserializedLibrary.Tracks.First().Title.Should().Be(track.Title);

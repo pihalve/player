@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Pihalve.Player.Library;
+using Pihalve.Player.Persistence;
 using Pihalve.Player.Tagging;
 
 namespace Pihalve.Player.Bootstrapping
@@ -19,7 +20,8 @@ namespace Pihalve.Player.Bootstrapping
                     c.ResolveNamed<ITagReader>("tagReader"), 
                     c.ResolveNamed<ITagReader>("fallbackTagReader")))
                 .As<ITrackFactory>().InstancePerLifetimeScope();
-            builder.RegisterType<LibraryXmlSerializer>().As<ILibrarySerializer>().InstancePerLifetimeScope();
+            builder.RegisterType<AppDataXmlPersister<Library.Model.Library>>().As<IAppDataPersister<Library.Model.Library>>()
+                .WithParameter("productAppDataFolderPath", SpecialFolder.ProductLocalApplicationData).InstancePerLifetimeScope();
 
             builder.RegisterType<MainWindow>().SingleInstance();
 
