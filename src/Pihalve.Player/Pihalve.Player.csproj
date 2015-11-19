@@ -100,6 +100,15 @@
     <Compile Include="Persistence\IAppDataPersister.cs" />
     <Compile Include="Persistence\AppDataXmlPersister.cs" />
     <Compile Include="Persistence\SpecialFolder.cs" />
+    <Compile Include="ProcessingWindow.xaml.cs">
+      <DependentUpon>ProcessingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="QueryConditionEditor.xaml.cs">
+      <DependentUpon>QueryConditionEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SmartPlaylistEditorWindow.xaml.cs">
+      <DependentUpon>SmartPlaylistEditorWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tagging\FileTagReader.cs" />
     <Compile Include="Tagging\ITagReader.cs" />
     <Compile Include="Library\ILibraryBuilder.cs" />
@@ -118,7 +127,23 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ProcessingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="QueryConditionEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SmartPlaylistEditorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\CoreStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\SmartPlaylistEditorStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

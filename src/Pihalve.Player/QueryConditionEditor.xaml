@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="Pihalve.Player.QueryConditionEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Pihalve.Player"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <ComboBox Name="Field" Grid.Column="0" Margin="0 0 10 0" />
+        <ComboBox Name="Operator" Grid.Column="1" Margin="0 0 10 0" />
+        <TextBox Name="Value" Grid.Column="2" />
+        <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Name="RemoveCondition">-</Button>
+            <Button Name="AddCondition">+</Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

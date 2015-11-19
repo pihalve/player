@@ -18,21 +18,25 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
-                <MenuItem Header="_Library">
-                    <MenuItem Header="_New..." Click="LibraryNew_Click"></MenuItem>
+                <MenuItem Header="_New">
+                    <MenuItem Header="_Playlist" />
+                    <MenuItem Header="_Smart playlist..." Click="SmartPlaylistNew_OnClick" />
                 </MenuItem>
-                <MenuItem Header="_Settings"></MenuItem>
-                <MenuItem Command="cmd:Application.Exit"></MenuItem>
+                <MenuItem Header="_Library">
+                    <MenuItem Header="_New..." Click="LibraryNew_Click" />
+                </MenuItem>
+                <MenuItem Header="_Settings" />
+                <MenuItem Command="cmd:Application.Exit" />
             </MenuItem>
             <MenuItem Header="_Playback">
-                <MenuItem Command="cmd:Playback.Play"></MenuItem>
-                <MenuItem Command="cmd:Playback.Pause"></MenuItem>
-                <MenuItem Command="cmd:Playback.Stop"></MenuItem>
-                <MenuItem Command="cmd:Playback.Previous"></MenuItem>
-                <MenuItem Command="cmd:Playback.Next"></MenuItem>
+                <MenuItem Command="cmd:Playback.Play" />
+                <MenuItem Command="cmd:Playback.Pause" />
+                <MenuItem Command="cmd:Playback.Stop" />
+                <MenuItem Command="cmd:Playback.Previous" />
+                <MenuItem Command="cmd:Playback.Next" />
             </MenuItem>
             <MenuItem Header="_Help">
-                <MenuItem Header="_About"></MenuItem>
+                <MenuItem Header="_About" />
             </MenuItem>
         </Menu>
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">

@@ -9,6 +9,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/CoreStyles.xaml" />
+                <ResourceDictionary Source="Styles/SmartPlaylistEditorStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <valueConverters:CollectionToStringConverter x:Key="CollectionToStringConverter" />
             <valueConverters:TimespanToStringConverter x:Key="TimespanToStringConverter" />

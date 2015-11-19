@@ -1,0 +1,24 @@
+﻿<Window x:Class="Pihalve.Player.SmartPlaylistEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Pihalve.Player"
+        mc:Ignorable="d"
+        Title="Smart playlist" Height="250" Width="500" WindowState="Normal" ResizeMode="NoResize">
+    <Border Style="{StaticResource SmartPlaylistEditorBorder}">
+        <DockPanel>
+            <DockPanel DockPanel.Dock="Top" Style="{StaticResource TopPanel}">
+                <Label Target="{Binding ElementName=SmartPlaylistName}">Name</Label>
+                <TextBox Name="SmartPlaylistName" />
+            </DockPanel>
+            <StackPanel DockPanel.Dock="Bottom" Style="{StaticResource CommandPanel}">
+                <Button Style="{StaticResource CommandButton}">OK</Button>
+                <Button Style="{StaticResource CommandButton}">Cancel</Button>
+            </StackPanel>
+            <StackPanel Style="{StaticResource QueryConditionEditor}">
+                <local:QueryConditionEditor></local:QueryConditionEditor>
+            </StackPanel>
+        </DockPanel>
+    </Border>
+</Window>

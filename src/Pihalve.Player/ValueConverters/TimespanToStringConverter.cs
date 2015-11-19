@@ -16,7 +16,6 @@ namespace Pihalve.Player.ValueConverters
             }
 
             var val = (TimeSpan)value;
-            if (val == TimeSpan.Zero) val = new TimeSpan(3,4,5);
 
             return val.TotalDays >= 1 ? $@"{val:d\:hh\:mm\:ss}" : val.TotalHours >= 1 ? $@"{val:h\:mm\:ss}" : $@"{val:m\:ss}";
         }

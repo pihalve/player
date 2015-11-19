@@ -7,7 +7,7 @@ namespace Pihalve.Player.Bootstrapping
 {
     public static class BootLoader
     {
-        public static IContainer Container;
+        private static IContainer _container;
 
         public static void Boot()
         {
@@ -23,9 +23,21 @@ namespace Pihalve.Player.Bootstrapping
             builder.RegisterType<AppDataXmlPersister<Library.Model.Library>>().As<IAppDataPersister<Library.Model.Library>>()
                 .WithParameter("productAppDataFolderPath", SpecialFolder.ProductLocalApplicationData).InstancePerLifetimeScope();
 
+            builder.RegisterType<ProcessingWindow>().InstancePerDependency();
+            builder.RegisterType<SmartPlaylistEditorWindow>().InstancePerDependency();
             builder.RegisterType<MainWindow>().SingleInstance();
 
-            Container = builder.Build();
+            _container = builder.Build();
+        }
+
+        public static T Resolve<T>()
+        {
+            return _container.Resolve<T>();
+        }
+
+        public static T Resolve<T>(string parameterName, object parameterValue)
+        {
+            return _container.Resolve<T>(new NamedParameter(parameterName, parameterValue));
         }
     }
 }

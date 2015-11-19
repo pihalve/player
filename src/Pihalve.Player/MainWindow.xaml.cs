@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Autofac;
+using Pihalve.Player.Bootstrapping;
 using Pihalve.Player.Library;
 using Pihalve.Player.Library.Model;
 using Pihalve.Player.Persistence;
@@ -50,7 +54,7 @@ namespace Pihalve.Player
             Closing += MainWindow_Closing;
 
             _filesPath = @"M:\VA";
-            var library = _libraryPersister.Load(LibraryFileName);
+            var library = _libraryPersister.Load(LibraryFileName) ?? new Library.Model.Library();
             BindLibrary(library);
 
             _mediaPlayer = new WindowsMediaPlayer();
@@ -65,6 +69,12 @@ namespace Pihalve.Player
             Settings.Default.MainWindowHeight = Height;
         }
 
+        private void SmartPlaylistNew_OnClick(object sender, RoutedEventArgs e)
+        {
+            var smartPlaylistEditor = BootLoader.Resolve<SmartPlaylistEditorWindow>();
+            smartPlaylistEditor.ShowDialog();
+        }
+
         private void LibraryNew_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new System.Windows.Forms.FolderBrowserDialog();
@@ -72,13 +82,24 @@ namespace Pihalve.Player
             System.Windows.Forms.DialogResult result = dialog.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
             {
-                var libraryBuilder = new NewLibraryBuilder(new Uri(dialog.SelectedPath), _trackFactory);
-                LibraryDirector.Construct(libraryBuilder);
+                var processor = new Func<BackgroundWorker, Library.Model.Library>(bw => CreateNewLibrary(bw, dialog.SelectedPath));
+                var processingWindow = BootLoader.Resolve<ProcessingWindow>("processor", processor);
+                processingWindow.Left = Left + Width / 2 - processingWindow.Width / 2;
+                processingWindow.Top = Top + Height / 2 - processingWindow.Height / 2;
+                processingWindow.ShowDialog();
+                var library = (Library.Model.Library)processingWindow.Result;
 
-                _libraryPersister.Save(libraryBuilder.Library, LibraryFileName);
+                _libraryPersister.Save(library, LibraryFileName);
 
-                BindLibrary(libraryBuilder.Library);
+                BindLibrary(library);
             }
+        }
+
+        private Library.Model.Library CreateNewLibrary(BackgroundWorker bw, string libraryFolderPath)
+        {
+            var libraryBuilder = new NewLibraryBuilder(new Uri(libraryFolderPath), _trackFactory, bw);
+            LibraryDirector.Construct(libraryBuilder);
+            return libraryBuilder.Library;
         }
 
         private void ExitCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)

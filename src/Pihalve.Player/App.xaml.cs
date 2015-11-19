@@ -21,7 +21,7 @@ namespace Pihalve.Player
 
             BootLoader.Boot();
 
-            var mainWindow = BootLoader.Container.Resolve<MainWindow>();
+            var mainWindow = BootLoader.Resolve<MainWindow>();
             mainWindow.Show();
         }
 
