@@ -6,6 +6,7 @@ namespace Pihalve.Player.Library.Model
     public class Track
     {
         public Guid Id { get; set; }
+        public string Location { get; set; }
 
         public int? Number { get; set; }
         public int? DiscNumber { get; set; }
@@ -22,6 +23,6 @@ namespace Pihalve.Player.Library.Model
         public DateTimeOffset? Modified { get; set; }
         public int PlayCount { get; set; }
         public DateTimeOffset? LastPlayed { get; set; }
-        public string Location { get; set; }
+        public int Rating { get; set; }
     }
 }

@@ -13,12 +13,21 @@
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <ComboBox Name="Field" Grid.Column="0" Margin="0 0 10 0" />
-        <ComboBox Name="Operator" Grid.Column="1" Margin="0 0 10 0" />
-        <TextBox Name="Value" Grid.Column="2" />
+        <ComboBox Name="Field" Grid.Column="0" Margin="0 0 10 0"
+                  ItemsSource="{Binding Path=Fields}"
+                  DisplayMemberPath="DisplayName"
+                  SelectedValuePath="Value"
+                  SelectedItem="{Binding Path=Field}" />
+        <ComboBox Name="Operator" Grid.Column="1" Margin="0 0 10 0"
+                  ItemsSource="{Binding Path=Operators}"
+                  DisplayMemberPath="DisplayName"
+                  SelectedValuePath="Value" 
+                  SelectedItem="{Binding Path=Operator}" />
+        <TextBox Name="Value" Grid.Column="2"
+                 Text="{Binding Path=Value}" />
         <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Name="RemoveCondition">-</Button>
-            <Button Name="AddCondition">+</Button>
+            <Button Name="RemoveCondition" Click="RemoveCondition_OnClick">-</Button>
+            <Button Name="AddCondition" Click="AddCondition_OnClick">+</Button>
         </StackPanel>
     </Grid>
 </UserControl>

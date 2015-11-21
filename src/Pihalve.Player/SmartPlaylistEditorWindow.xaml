@@ -1,11 +1,11 @@
-﻿<Window x:Class="Pihalve.Player.SmartPlaylistEditorWindow"
+﻿<Window x:Class="Pihalve.Player.SmartPlaylistEditorWindow" x:Name="SmartPlaylistEditor"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pihalve.Player"
         mc:Ignorable="d"
-        Title="Smart playlist" Height="250" Width="500" WindowState="Normal" ResizeMode="NoResize">
+        Title="Smart playlist" Height="255" Width="500" MinWidth="500" MaxWidth="500" WindowState="Normal">
     <Border Style="{StaticResource SmartPlaylistEditorBorder}">
         <DockPanel>
             <DockPanel DockPanel.Dock="Top" Style="{StaticResource TopPanel}">
@@ -13,12 +13,14 @@
                 <TextBox Name="SmartPlaylistName" />
             </DockPanel>
             <StackPanel DockPanel.Dock="Bottom" Style="{StaticResource CommandPanel}">
-                <Button Style="{StaticResource CommandButton}">OK</Button>
-                <Button Style="{StaticResource CommandButton}">Cancel</Button>
+                <Button Style="{StaticResource CommandButton}" IsDefault="True" Click="OkButton_OnClick">_OK</Button>
+                <Button Style="{StaticResource CommandButton}" IsCancel="True">_Cancel</Button>
             </StackPanel>
-            <StackPanel Style="{StaticResource QueryConditionEditor}">
-                <local:QueryConditionEditor></local:QueryConditionEditor>
-            </StackPanel>
+            <ScrollViewer VerticalScrollBarVisibility="Visible">
+                <StackPanel Name="ConditionEditorPanel" Style="{StaticResource QueryConditionEditor}">
+                    <ItemsControl ItemsSource="{Binding ElementName=SmartPlaylistEditor, Path=ConditionEditors}" />
+                </StackPanel>
+            </ScrollViewer>
         </DockPanel>
     </Border>
 </Window>

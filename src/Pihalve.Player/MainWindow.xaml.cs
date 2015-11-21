@@ -1,21 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Autofac;
 using Pihalve.Player.Bootstrapping;
 using Pihalve.Player.Library;
 using Pihalve.Player.Library.Model;
@@ -35,6 +22,7 @@ namespace Pihalve.Player
         private readonly IAppDataPersister<Library.Model.Library> _libraryPersister;
         private readonly IMediaPlayer _mediaPlayer;
         private string _filesPath;
+        private Library.Model.Library _library;
 
         public MainWindow(ITrackFactory trackFactory, IAppDataPersister<Library.Model.Library> libraryPersister)
         {
@@ -54,31 +42,43 @@ namespace Pihalve.Player
             Closing += MainWindow_Closing;
 
             _filesPath = @"M:\VA";
-            var library = _libraryPersister.Load(LibraryFileName) ?? new Library.Model.Library();
-            BindLibrary(library);
+            _library = _libraryPersister.Load(LibraryFileName) ?? new Library.Model.Library();
+            BindLibrary();
 
             _mediaPlayer = new WindowsMediaPlayer();
             _mediaPlayer.Volume = .5d;
         }
 
-        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void MainWindow_Closing(object sender, CancelEventArgs e)
         {
             Settings.Default.MainWindowLeft = Left;
             Settings.Default.MainWindowTop = Top;
             Settings.Default.MainWindowWidth = Width;
             Settings.Default.MainWindowHeight = Height;
+
+            SaveLibrary();
         }
 
         private void SmartPlaylistNew_OnClick(object sender, RoutedEventArgs e)
         {
             var smartPlaylistEditor = BootLoader.Resolve<SmartPlaylistEditorWindow>();
-            smartPlaylistEditor.ShowDialog();
+            smartPlaylistEditor.Left = Left + Width / 2 - smartPlaylistEditor.Width / 2;
+            smartPlaylistEditor.Top = Top + Height / 2 - smartPlaylistEditor.Height / 2;
+
+            bool? result = smartPlaylistEditor.ShowDialog();
+            if (result.HasValue && result.Value)
+            {
+                _library.SmartPlaylists.Add(smartPlaylistEditor.SmartPlaylist);
+                _library.IsDirty = true;
+            }
+
         }
 
         private void LibraryNew_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new System.Windows.Forms.FolderBrowserDialog();
             dialog.SelectedPath = _filesPath;
+
             System.Windows.Forms.DialogResult result = dialog.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
             {
@@ -86,12 +86,13 @@ namespace Pihalve.Player
                 var processingWindow = BootLoader.Resolve<ProcessingWindow>("processor", processor);
                 processingWindow.Left = Left + Width / 2 - processingWindow.Width / 2;
                 processingWindow.Top = Top + Height / 2 - processingWindow.Height / 2;
+
                 processingWindow.ShowDialog();
-                var library = (Library.Model.Library)processingWindow.Result;
+                _library = (Library.Model.Library)processingWindow.Result;
 
-                _libraryPersister.Save(library, LibraryFileName);
+                SaveLibrary();
 
-                BindLibrary(library);
+                BindLibrary();
             }
         }
 
@@ -206,11 +207,19 @@ namespace Pihalve.Player
             _mediaPlayer.Close();
         }
 
-        private void BindLibrary(Library.Model.Library library)
+        private void BindLibrary()
         {
-            ContentList.ItemsSource = library.Tracks;
+            ContentList.ItemsSource = _library.Tracks;
             ContentList.Items.MoveCurrentTo(null);
             ////ContentList.IsSynchronizedWithCurrentItem = true;
+        }
+
+        private void SaveLibrary()
+        {
+            if (_library.IsDirty)
+            {
+                _libraryPersister.Save(_library, LibraryFileName);
+            }
         }
     }
 }

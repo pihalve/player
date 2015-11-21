@@ -97,12 +97,15 @@
     <Compile Include="Commands\Application.cs" />
     <Compile Include="Commands\Playback.cs" />
     <Compile Include="IMediaPlayer.cs" />
+    <Compile Include="Library\Model\QueryCondition.cs" />
+    <Compile Include="Library\Model\SmartPlaylist.cs" />
     <Compile Include="Persistence\IAppDataPersister.cs" />
     <Compile Include="Persistence\AppDataXmlPersister.cs" />
     <Compile Include="Persistence\SpecialFolder.cs" />
     <Compile Include="ProcessingWindow.xaml.cs">
       <DependentUpon>ProcessingWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="QueryConditionEditor.xaml.cs">
       <DependentUpon>QueryConditionEditor.xaml</DependentUpon>
     </Compile>
@@ -149,8 +152,13 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Utilities\PathExpressionVisitor.cs" />
     <Compile Include="ValueConverters\CollectionToStringConverter.cs" />
     <Compile Include="ValueConverters\TimespanToStringConverter.cs" />
+    <Compile Include="ViewModels\FieldViewModel.cs" />
+    <Compile Include="ViewModels\OperatorViewModel.cs" />
+    <Compile Include="ViewModels\QueryConditionListViewModel.cs" />
+    <Compile Include="ViewModels\QueryConditionViewModel.cs" />
     <Compile Include="WindowsMediaPlayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Pihalve.Player.ViewModels;
 
 namespace Pihalve.Player
 {
@@ -20,9 +10,36 @@ namespace Pihalve.Player
     /// </summary>
     public partial class QueryConditionEditor : UserControl
     {
+        public event EventHandler ConditionRemove;
+        public event EventHandler ConditionAdd;
+
         public QueryConditionEditor()
         {
             InitializeComponent();
+
+            DataContext = new QueryConditionViewModel();
+        }
+
+        public QueryConditionViewModel Model => (QueryConditionViewModel)DataContext;
+
+        private void RemoveCondition_OnClick(object sender, RoutedEventArgs e)
+        {
+            OnConditionRemove();
+        }
+
+        private void AddCondition_OnClick(object sender, RoutedEventArgs e)
+        {
+            OnConditionAdd();
+        }
+
+        protected virtual void OnConditionRemove()
+        {
+            ConditionRemove?.Invoke(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnConditionAdd()
+        {
+            ConditionAdd?.Invoke(this, EventArgs.Empty);
         }
     }
 }

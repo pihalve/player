@@ -18,7 +18,10 @@ namespace Pihalve.Player.Library
             _libraryPath = libraryPath;
             _trackFactory = trackFactory;
             _backgroundWorker = backgroundWorker;
-            Library = new Model.Library();
+            Library = new Model.Library
+            {
+                IsDirty = true
+            };
         }
 
         public void BuildTrackList()
